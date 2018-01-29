@@ -1,0 +1,142 @@
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCrrVy8FgG_jV-1h0EM4jpKbF3Vk5EjwCc",
+    authDomain: "eciis-splab.firebaseapp.com",
+    databaseURL: "https://eciis-splab.firebaseio.com",
+    projectId: "eciis-splab",
+    storageBucket: "eciis-splab.appspot.com",
+    messagingSenderId: "475274594399"
+  };
+  firebase.initializeApp(config);
+</script>
+<md-content layout="row" layout-align="center start" md-colors="{background: 'teal-50'}">
+  <div flex="95" flex-gt-md="50">
+    <div style="text-align: center">
+      <img class="logo" ng-src="/img/logo.png" />
+    </div>
+    <md-card class="card">
+      <md-card-content>
+        <form layout="column" ng-submit="app.submit()">
+          <h1>Para que possamos apresentar as funcionalidades da PLATAFORMA CIS, responda as questões abaixo:</h1>
+          <md-input-container>
+            <label>Seu nome</label>
+            <input type="text" ng-model="app.answer.nome" ng-required="true">
+          </md-input-container>
+          <md-input-container>
+            <label>Seu e-mail</label>
+            <input type="email" ng-model="app.answer.email" ng-required="true">
+          </md-input-container>
+
+          <!-- BROWSER DEFINITION -->
+          <div class="section" layout="column">
+            <div layout="row">
+              <div class="section-title">
+                <b>Definição do Navegador</b>
+              </div>
+              <div class="outer-triangle"></div>
+            </div>
+            <p class="section-description md-caption">
+              É importante saber qual navegador você utiliza para acessar a internet. Esta informação permitirá otimizar o uso da plataforma
+              em cada navegador disponível e mais utilizado.
+            </p>
+            <div layout="column">
+              <h1 class="md-headline">Pretendo testar a Plataforma CIS no navegador:</h1>
+              <div ng-repeat="browser in app.browsers">
+                <md-checkbox ng-checked="app.exists(browser.name, app.answer.navegadores)" ng-click="app.select(browser.name, app.answer.navegadores)">
+                  {{ browser.name }} <md-icon md-svg-icon="/img/{{browser.icon}}"></md-icon>
+                </md-checkbox>
+              </div>
+              <md-checkbox>
+                Outro:
+                <input type="text" ng-model="app.answer.outroNavegador">
+              </md-checkbox>
+            </div>
+            <div layout="column">
+              <h1 class="md-headline">Pretendo testar a Plataforma CIS no sistema operacional:</h1>
+              <div ng-repeat="system in app.operationalSystems">
+                <md-checkbox ng-checked="app.exists(system.name, app.answer.so)" ng-click="app.select(system.name, app.answer.so)">
+                  {{ system.name }} <md-icon md-svg-icon="/img/{{system.icon}}"></md-icon>
+                </md-checkbox>
+              </div>
+              <md-checkbox>
+                Outro:
+                <input type="text" ng-model="app.answer.outroSO">
+              </md-checkbox>
+            </div>
+          </div>
+
+          <!-- ADMIN DEFINITION -->
+          <div class="section" layout="column">
+            <div layout="row">
+              <div class="section-title">
+                <b>Definição do Administrador</b>
+              </div>
+              <div class="outer-triangle"></div>
+            </div>
+            <p class="section-description md-caption">
+              Todos os membros da plataforma devem estar vinculados a uma instituição. Cada Instituição deverá ter apenas um administrador
+              que será responsável pela gestão da página, tendo as seguintes atribuições:
+              <br>
+              <br> Criar a página da instituição;
+              <br> Gerenciar membros da instituição (adicionar e remover);
+              <br> Monitorar conteúdo da página.
+              <br>
+            </p>
+            <h1 class="md-headline">Você poderia ser o Administrador?</h1>
+            <md-radio-group ng-model="app.answer.podeSerAdministrador">
+              <md-radio-button value="sim">Sim</md-radio-button>
+              <md-radio-button value="nao">Não</md-radio-button>
+            </md-radio-group>
+          </div>
+
+          <!-- ADMIN INFORMATION -->
+          <div class="section" layout="column" ng-if="app.answer.podeSerAdministrador === 'nao'">
+            <div layout="row">
+              <div class="section-title">
+                <b>Caso você não possa ser o administrador quem seria?</b>
+              </div>
+              <div class="outer-triangle"></div>
+            </div>
+            <md-input-container class="md-no-float">
+              <label>Nome</label>
+              <input type="text" ng-model="app.answer.nomeAdministrador"
+                ng-required="app.answer.podeSerAdministrador === 'nao'">
+            </md-input-container>
+            <md-input-container>
+              <label>E-mail</label>
+              <input type="email" ng-model="app.answer.emailAdministrador"
+                ng-required="app.answer.podeSerAdministrador === 'nao'">
+            </md-input-container>
+          </div>
+
+          <!-- ADMIN INFORMATION -->
+          <div class="section" layout="column">
+            <div layout="row">
+              <div class="section-title">
+                <b>Compromisso com os testes da PLATAFORMA CIS</b>
+              </div>
+              <div class="outer-triangle"></div>
+            </div>
+            <p class="section-description md-caption">
+              Os testes na PLATAFORMA CIS serão realizados até o mês de março
+            </p>
+            <h1 class="md-headline">Me comprometo a testar a plataforma:</h1>
+            <md-radio-group ng-model="app.answer.comprometimento">
+              <md-radio-button value="2porDia">Duas vezes por dia</md-radio-button>
+              <md-radio-button value="1porDia">Uma vez por dia</md-radio-button>
+              <md-radio-button value="2porSemana">Duas vezes por semana</md-radio-button>
+              <md-radio-button value="1porSemana">Uma vez por semana</md-radio-button>
+            </md-radio-group>
+          </div>
+          <div layout="row" layout-align="start center">
+            <md-button type="submit" class="md-raised" md-colors="{background: 'teal-600'}">Enviar</md-button>
+          </div>
+        </form>
+      </md-card-content>
+    </md-card>
+    <div layout="row" layout-align="center center" class="footer">
+      <span class="md-caption">Plataforma Virtual CIS - 2018</span>
+    </div>
+  </div>
+</md-content>
