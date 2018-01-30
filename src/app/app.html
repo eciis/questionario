@@ -1,23 +1,12 @@
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCrrVy8FgG_jV-1h0EM4jpKbF3Vk5EjwCc",
-    authDomain: "eciis-splab.firebaseapp.com",
-    databaseURL: "https://eciis-splab.firebaseio.com",
-    projectId: "eciis-splab",
-    storageBucket: "eciis-splab.appspot.com",
-    messagingSenderId: "475274594399"
-  };
-  firebase.initializeApp(config);
-</script>
-<md-content layout="row" layout-align="center start" md-colors="{background: 'teal-50'}">
+<md-content layout-fill layout="row" layout-align="center start" md-colors="{background: 'teal-50'}">
   <div flex="95" flex-gt-md="50">
     <div style="text-align: center">
       <img class="logo" ng-src="/img/logo.png" />
     </div>
     <md-card class="card">
       <md-card-content>
-        <form layout="column" ng-submit="app.submit()">
+        <h1 ng-if="app.submited">Obrigado! Sua resposta foi armazenada.</h1>
+        <form layout="column" name="form" ng-submit="app.submit(form); submited = true;" ng-if="!app.submited">
           <h1>Para que possamos apresentar as funcionalidades da PLATAFORMA CIS, responda as questões abaixo:</h1>
           <md-input-container>
             <label>Seu nome</label>
@@ -36,7 +25,7 @@
               </div>
               <div class="outer-triangle"></div>
             </div>
-            <p class="section-description md-caption">
+            <p class="section-description md-subhead">
               É importante saber qual navegador você utiliza para acessar a internet. Esta informação permitirá otimizar o uso da plataforma
               em cada navegador disponível e mais utilizado.
             </p>
@@ -47,7 +36,7 @@
                   {{ browser.name }} <md-icon md-svg-icon="/img/{{browser.icon}}"></md-icon>
                 </md-checkbox>
               </div>
-              <md-checkbox>
+              <md-checkbox ng-checked="app.answer.outroNavegador" disabled="true">
                 Outro:
                 <input type="text" ng-model="app.answer.outroNavegador">
               </md-checkbox>
@@ -59,7 +48,7 @@
                   {{ system.name }} <md-icon md-svg-icon="/img/{{system.icon}}"></md-icon>
                 </md-checkbox>
               </div>
-              <md-checkbox>
+              <md-checkbox ng-checked="app.answer.outroSO" disabled="true">
                 Outro:
                 <input type="text" ng-model="app.answer.outroSO">
               </md-checkbox>
@@ -74,7 +63,7 @@
               </div>
               <div class="outer-triangle"></div>
             </div>
-            <p class="section-description md-caption">
+            <p class="section-description md-subhead">
               Todos os membros da plataforma devem estar vinculados a uma instituição. Cada Instituição deverá ter apenas um administrador
               que será responsável pela gestão da página, tendo as seguintes atribuições:
               <br>
@@ -84,7 +73,7 @@
               <br>
             </p>
             <h1 class="md-headline">Você poderia ser o Administrador?</h1>
-            <md-radio-group ng-model="app.answer.podeSerAdministrador">
+            <md-radio-group ng-init="app.answer.podeSerAdministrador = 'sim'" ng-model="app.answer.podeSerAdministrador">
               <md-radio-button value="sim">Sim</md-radio-button>
               <md-radio-button value="nao">Não</md-radio-button>
             </md-radio-group>
@@ -118,11 +107,11 @@
               </div>
               <div class="outer-triangle"></div>
             </div>
-            <p class="section-description md-caption">
+            <p class="section-description md-subhead">
               Os testes na PLATAFORMA CIS serão realizados até o mês de março
             </p>
             <h1 class="md-headline">Me comprometo a testar a plataforma:</h1>
-            <md-radio-group ng-model="app.answer.comprometimento">
+            <md-radio-group ng-init="app.answer.comprometimento = '2porDia'" ng-model="app.answer.comprometimento">
               <md-radio-button value="2porDia">Duas vezes por dia</md-radio-button>
               <md-radio-button value="1porDia">Uma vez por dia</md-radio-button>
               <md-radio-button value="2porSemana">Duas vezes por semana</md-radio-button>
@@ -130,7 +119,10 @@
             </md-radio-group>
           </div>
           <div layout="row" layout-align="start center">
-            <md-button type="submit" class="md-raised" md-colors="{background: 'teal-600'}">Enviar</md-button>
+            <md-button type="submit" class="md-raised" md-colors="{background: 'teal-600'}"
+              ng-if="!app.loading">Enviar
+            </md-button>
+            <md-progress-circular ng-if="app.loading" md-mode="indeterminate"></md-progress-circular>
           </div>
         </form>
       </md-card-content>

@@ -1,58 +1,58 @@
 body {
-    background: rgb(194, 214, 212);
+  background: rgb(194, 214, 212);
 }
 
 .logo {
-    width: 70%;
-    max-width: 500px;
-    margin: 20px;
+  width: 70%;
+  max-width: 500px;
+  margin: 20px;
 }
 
 .card {
-    max-width: 600px;
-    margin: auto;
-    border-top: 5px solid #00695C;
+  max-width: 600px;
+  margin: auto;
+  border-top: 5px solid #00695C;
 }
 
 .section {
-    padding: 10px;
+  padding: 10px;
 }
 
 .section-title {
-    margin-left: -26px;
-    padding: 10px 20px 10px 20px;
-    color: white;
-    background-color: #00695C;
-    margin-bottom: 20px;
+  margin-left: -26px;
+  padding: 10px 20px 10px 20px;
+  color: white;
+  background-color: #00695C;
+  margin-bottom: 20px;
 }
 
 .section-description {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .outer-triangle {
-    border-left: 40px solid #00695C;
-    border-right: 40px solid transparent;
-    border-bottom: 40px solid transparent;
-    height: 0;
-    width: 0;
-    z-index: 1;
-    margin-bottom: 20px;
+  border-left: 40px solid #00695C;
+  border-right: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+  height: 0;
+  width: 0;
+  z-index: 1;
+  margin-bottom: 20px;
 }
 
 .footer {
-    margin: 20px;
+  margin: 20px;
 }
 
 @media only screen and (max-width: 640px) {
-    .section {
-        padding-right: 0px;
-    }
-    .section-title {
-        width: 100%;
-    }
-    .outer-triangle {
-        display: none;
-        border: 0;
-    }
+  .section {
+      padding-right: 0px;
+  }
+  .section-title {
+      width: 100%;
+  }
+  .outer-triangle {
+      display: none;
+      border: 0;
+  }
 }
