@@ -76,6 +76,7 @@ class AppCtrl {
     };
 
     function getUserInfo() {
+      // Using code from: http://www.javascripter.net/faq/index.htm
       var nVer = navigator.appVersion;
       var nAgt = navigator.userAgent;
       var browserName = navigator.appName;
@@ -187,7 +188,6 @@ class AppCtrl {
 
       var newNode = firebase.database().ref('questionario/').push();
 
-      
       function callback(controller) {
         controller.submited = true;
       }
@@ -204,12 +204,11 @@ angular.module(MODULE_NAME, ['ngMaterial'])
   .controller('AppCtrl', AppCtrl)
   .run(function () {
     var config = {
-      apiKey: "AIzaSyCmIPGTNwwX6SXOlxIoO2UgCVy-5Y0Q3-c",
-      authDomain: "plataforma-cis.firebaseapp.com",
-      databaseURL: "https://plataforma-cis.firebaseio.com",
-      projectId: "plataforma-cis",
-      storageBucket: "",
-      messagingSenderId: "224208425156"
+      apiKey: "API-KEY",
+      authDomain: "FIREBASE-URL",
+      databaseURL: "DATABASE-URL",
+      projectId: "PROJECT-ID",
+      storageBucket: ""
     };
     firebase.initializeApp(config);
   });
