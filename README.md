@@ -3,3 +3,5 @@
 1. Clone the Repository
 2. Execute `npm install`
 3. And `npm start` to run the server.
+
+To prouduce a production version execute `npm run build`.
